@@ -1,7 +1,7 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
 public class Alumnos {
-    private String nia;
+    private int nia;
     private String nombre;
     private String apellidos;
     private String fecha_nacimiento;
@@ -20,11 +20,11 @@ public class Alumnos {
                 '}';
     }
 
-    public String getNia() {
+    public int getNia() {
         return nia;
     }
 
-    public void setNia(String nia) {
+    public void setNia(int nia) {
         this.nia = nia;
     }
 
@@ -68,7 +68,7 @@ public class Alumnos {
         this.telefono = telefono;
     }
 
-    public Alumnos(String nia, String nombre, String apellidos, String fecha_nacimiento, String grupo, int telefono) {
+    public Alumnos(int nia, String nombre, String apellidos, String fecha_nacimiento, String grupo, int telefono) {
         this.nia = nia;
         this.nombre = nombre;
         this.apellidos = apellidos;

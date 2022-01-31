@@ -1,9 +1,18 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
+import com.cristobalbernal.Tema082022.Ejercicio2.Asiganatura;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 
 public class Principal {
+    private static final int ALUMNOS =  1000;
+    private static final int MAXIMO_TELEFONO = 8;
+    Alumnos [] alumnos;
+
+    public Principal(){
+        alumnos = new Alumnos[ALUMNOS];
+    }
     public void execute(){
+
         int opcion;
         do {
             opcion = menuPrincipal();
@@ -44,15 +53,33 @@ public class Principal {
     }
 
     private void busquedaApellidos() {
-
+        String apellidos;
+        System.out.println("Escribe el nia: ");
+        apellidos = Lib.leerLinea();
+        for (int i = 0; i < ALUMNOS ; i++) {
+            if (alumnos[i].getApellidos().equals(apellidos)){
+                System.out.println(apellidos);
+            }else {
+                System.out.println("No se ha encontrado ese apellido!!!!");
+            }
+        }
     }
 
     private void busquedaNia() {
-
+        int nia;
+        System.out.println("Escribe el nia: ");
+        nia = Lib.leerInt();
+        for (int i = 0; i < ALUMNOS ; i++) {
+            if (alumnos[i].getNia() == nia){
+                System.out.println(alumnos[i]);
+            }
+        }
     }
 
     private void busquedaEdad() {
-
+        int edad;
+        System.out.println("Escribe la edad: ");
+        edad = Lib.leerInt();
     }
 
     private void busquedaGrupo() {

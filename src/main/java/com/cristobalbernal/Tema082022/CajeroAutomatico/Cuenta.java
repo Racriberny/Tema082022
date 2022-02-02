@@ -8,8 +8,8 @@ public class Cuenta {
     public float getSaldo() {
         return saldo;
     }
-    public boolean ingreso(){
-      return false;
+    public float ingreso(float cantidadIngreso){
+        return getSaldo() + cantidadIngreso;
     }
     public float extraccion(int retirada){
         return getSaldo()-retirada;

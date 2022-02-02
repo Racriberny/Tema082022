@@ -14,24 +14,204 @@ public class Cajero {
         do {
             opcion = menuPrincipal();
             switch (opcion){
-                case 1://retiradaDinero();
+                case 1:retiradaDinero();
                     break;
                 case 2: consultarSaldo();
                     break;
-                case 3://ingresarDinero();
+                case 3:ingresarDinero();
                     break;
-                case 4://cambiarPin();
+                case 4:cambiarPin();
                     break;
             }
         }while (opcion !=0);
     }
 
-    private void consultarSaldo() {
-        int cuenta = 0;
-        //cambiar a tarjetaa
-        System.out.println("Seleccion la cuenta que quieras consultar el saldo: ");
-        cuenta = Lib.leerInt();
+    private void retiradaDinero() {
 
+
+    }
+
+    private void cambiarPin() {
+        int tarjeta;
+        int pin;
+        int pinCambiado;
+        boolean valido = false;
+        boolean validoTarjeta = false;
+
+        do {
+            System.out.println("Introduce la tarjeta: ");
+            tarjeta = Lib.leerInt();
+
+            if (tarjeta == tarjeta1.getNuemroTarjeta() || tarjeta == tarjeta2.getNuemroTarjeta() ||
+                    tarjeta == tarjeta3.getNuemroTarjeta()){
+                valido = true;
+            }
+        }while (!valido);
+
+        if (tarjeta == tarjeta1.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta1.getPin()){
+                    System.out.println("Pin correcto!!");
+                    System.out.println("Escribe la contraseña para cambiarla: ");
+                    pinCambiado = Lib.leerInt();
+                    tarjeta1.setPin(pinCambiado);
+                    System.out.println("Pin cambiado correctamente, Un saludo!!");
+                    validoTarjeta = true;
+                }
+
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta2.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta2.getPin()){
+                    System.out.println("Pin correcto!!");
+                    System.out.println("Escribe la contraseña para cambiarla: ");
+                    pinCambiado = Lib.leerInt();
+                    tarjeta2.setPin(pinCambiado);
+                    System.out.println("Pin cambiado correctamente, Un saludo!!");
+                    validoTarjeta = true;
+                }
+
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta3.getNuemroTarjeta()) {
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta3.getPin()) {
+                    System.out.println("Pin correcto!!");
+                    System.out.println("Escribe la contraseña para cambiarla: ");
+                    pinCambiado = Lib.leerInt();
+                    tarjeta3.setPin(pinCambiado);
+                    System.out.println("Pin cambiado correctamente, Un saludo!!");
+                    validoTarjeta = true;
+                }
+
+            } while (!validoTarjeta);
+        }
+    }
+
+    private void ingresarDinero() {
+        boolean validoTarjeta = false;
+        float ingreso = 0;
+        int tarjeta;
+        boolean valido = false;
+        int pin;
+
+        do {
+            System.out.println("Introduce la tarjeta!!!! ");
+            tarjeta = Lib.leerInt();
+
+            if (tarjeta == tarjeta1.getNuemroTarjeta() || tarjeta == tarjeta2.getNuemroTarjeta() ||
+                    tarjeta == tarjeta3.getNuemroTarjeta()){
+                valido = true;
+            }
+
+        }while (!valido);
+
+        if (tarjeta == tarjeta1.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta1.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    ingreso = Lib.leerFloat();
+                    cuenta1.ingreso(ingreso);
+                    validoTarjeta = true;
+                }
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta2.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta: ");
+                pin = Lib.leerInt();
+                if (pin == tarjeta2.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    ingreso = Lib.leerFloat();
+                    cuenta2.ingreso(ingreso);
+                    validoTarjeta = true;
+                }
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta3.getNuemroTarjeta()) {
+            do {
+                System.out.println("Escribe el pin de la tarjeta: ");
+                pin = Lib.leerInt();
+                if (pin == tarjeta3.getPin()) {
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    ingreso = Lib.leerFloat();
+                    cuenta3.ingreso(ingreso);
+                    validoTarjeta = true;
+                }
+            } while (!validoTarjeta);
+        }
+    }
+
+    private void consultarSaldo() {
+        int tarjeta;
+        int intentos = 3;
+        boolean validoTarjeta = false;
+        boolean valido = false;
+        int pin = 0;
+
+        do {
+            System.out.println("Introduce la tarjeta!!!! ");
+            tarjeta = Lib.leerInt();
+
+            if (tarjeta == tarjeta1.getNuemroTarjeta() || tarjeta == tarjeta2.getNuemroTarjeta() ||
+                    tarjeta == tarjeta3.getNuemroTarjeta()){
+                valido = true;
+            }
+
+        }while (!valido);
+
+        if (tarjeta == tarjeta1.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta1.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Saldo de la cuenta: " + cuenta1.getSaldo());
+                    validoTarjeta = true;
+                }else {
+                    intentos--;
+                    System.out.println("Pin incorrecto, tiene " + intentos + " intentos!!!");
+                }
+            }while (!validoTarjeta && intentos !=0);
+
+        }else if (tarjeta == tarjeta2.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta2.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Saldo de la cuenta: " + cuenta2.getSaldo());
+                    validoTarjeta = true;
+                }else {
+                    intentos--;
+                    System.out.println("Pin incorrecto, tiene " + intentos + " intentos!!!");
+                }
+            }while (!validoTarjeta || intentos !=0);
+
+        }else if (tarjeta == tarjeta3.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta3.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Saldo de la cuenta: " + cuenta3.getSaldo());
+                    validoTarjeta = true;
+                }else {
+                    intentos--;
+                    System.out.println("Pin incorrecto, tiene " + intentos + " intentos!!!");
+                }
+            }while (!validoTarjeta || intentos !=0);
+        }
+        //Se deberia de bloquear la tarjeta que ha superado los intentos, no se me ocurre ninguna forma...
+        intentos = 3;
     }
 
     public static int menuPrincipal(){

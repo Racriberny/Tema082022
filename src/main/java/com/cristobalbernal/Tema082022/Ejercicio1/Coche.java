@@ -1,12 +1,15 @@
 package com.cristobalbernal.Tema082022.Ejercicio1;
 
 public class Coche {
+    public enum Tipo {
+        MINI,UTILITARIO,FAMILIAR,DEPORTIVO
+    }
     private String modelo;
     private Color color;
     private boolean metalizado;
     private String matricula;
     private Tipo tipo;
-    private String fechaFabricacion;
+    private int fechaFabricacion;
     private Seguro seguro;
 
     public Coche(){
@@ -15,11 +18,11 @@ public class Coche {
         metalizado = true;
         matricula = "4613CRR";
         tipo = Tipo.DEPORTIVO;
-        fechaFabricacion = "2021";
+        fechaFabricacion = 2021;
         seguro = Seguro.TODORIESGO;
     }
 
-    public Coche(String modelo, Color color, boolean metalizado, String matricula, Tipo tipo, String fechaFabricacion, Seguro seguro) {
+    public Coche(String modelo, Color color, boolean metalizado, String matricula, Tipo tipo, int fechaFabricacion, Seguro seguro) {
         this.modelo = modelo;
         this.color = color;
         this.metalizado = metalizado;
@@ -28,6 +31,7 @@ public class Coche {
         this.fechaFabricacion = fechaFabricacion;
         this.seguro = seguro;
     }
+
 
     public String getModelo() {
         return modelo;
@@ -69,11 +73,11 @@ public class Coche {
         this.tipo = tipo;
     }
 
-    public String getFechaFabricacion() {
+    public int getFechaFabricacion() {
         return fechaFabricacion;
     }
 
-    public void setFechaFabricacion(String fechaFabricacion) {
+    public void setFechaFabricacion(int fechaFabricacion) {
         this.fechaFabricacion = fechaFabricacion;
     }
 
@@ -86,7 +90,7 @@ public class Coche {
     }
 
     public String imprimirCotxe(){
-        return "Modelo: " + modelo + "Color: " + color;
+        return "Modelo: " + modelo + " Color: " + color;
     }
 
     @Override
@@ -100,5 +104,8 @@ public class Coche {
                 ", fechaFabricacion='" + fechaFabricacion + '\'' +
                 ", seguro=" + seguro +
                 '}';
+    }
+    public void cambiarColor(Color color){
+        this.color = color;
     }
 }

@@ -60,7 +60,6 @@ public class Cajero {
                     System.out.println("Pin cambiado correctamente, Un saludo!!");
                     validoTarjeta = true;
                 }
-
             }while (!validoTarjeta);
         }else if (tarjeta == tarjeta2.getNuemroTarjeta()){
             do {
@@ -88,7 +87,6 @@ public class Cajero {
                     System.out.println("Pin cambiado correctamente, Un saludo!!");
                     validoTarjeta = true;
                 }
-
             } while (!validoTarjeta);
         }
     }
@@ -99,7 +97,9 @@ public class Cajero {
         int tarjeta;
         boolean valido = false;
         int pin;
-
+        float cuenta1Saldo = cuenta1.getSaldo();
+        float cuenta2Saldo = cuenta2.getSaldo();
+        float cuenta3Saldo = cuenta3.getSaldo();
         do {
             System.out.println("Introduce la tarjeta!!!! ");
             tarjeta = Lib.leerInt();
@@ -110,16 +110,15 @@ public class Cajero {
             }
 
         }while (!valido);
-
         if (tarjeta == tarjeta1.getNuemroTarjeta()){
             do {
                 System.out.println("Escribe el pin de la tarjeta");
                 pin = Lib.leerInt();
                 if (pin == tarjeta1.getPin()){
                     System.out.println("Pin correcto!!!");
-                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    System.out.println("Escribe la cantidad que quieres ingresar: ");
                     ingreso = Lib.leerFloat();
-                    cuenta1.ingreso(ingreso);
+                    cuenta1.setSaldo(cuenta1Saldo + ingreso);
                     validoTarjeta = true;
                 }
             }while (!validoTarjeta);
@@ -129,9 +128,9 @@ public class Cajero {
                 pin = Lib.leerInt();
                 if (pin == tarjeta2.getPin()){
                     System.out.println("Pin correcto!!!");
-                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    System.out.println("Escribe la cantidad que quieres ingresar: ");
                     ingreso = Lib.leerFloat();
-                    cuenta2.ingreso(ingreso);
+                    cuenta1.setSaldo(cuenta2Saldo + ingreso);
                     validoTarjeta = true;
                 }
             }while (!validoTarjeta);
@@ -141,15 +140,14 @@ public class Cajero {
                 pin = Lib.leerInt();
                 if (pin == tarjeta3.getPin()) {
                     System.out.println("Pin correcto!!!");
-                    System.out.println("Escribe la cantidad que quieres ingrasar: ");
+                    System.out.println("Escribe la cantidad que quieres ingresar: ");
                     ingreso = Lib.leerFloat();
-                    cuenta3.ingreso(ingreso);
+                    cuenta1.setSaldo(cuenta3Saldo + ingreso);
                     validoTarjeta = true;
                 }
             } while (!validoTarjeta);
         }
     }
-
     private void consultarSaldo() {
         int tarjeta;
         int intentos = 3;

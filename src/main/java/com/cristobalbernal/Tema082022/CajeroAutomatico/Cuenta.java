@@ -9,8 +9,13 @@ public class Cuenta {
         return saldo;
     }
     public float ingreso(float cantidadIngreso){
-        return getSaldo() + cantidadIngreso;
+        return saldo + cantidadIngreso;
     }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
     public float extraccion(int retirada){
         return getSaldo()-retirada;
     }

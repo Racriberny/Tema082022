@@ -27,7 +27,60 @@ public class Cajero {
     }
 
     private void retiradaDinero() {
+        int tarjeta;
+        int pin;
+        float retirada;
+        boolean valido = false;
+        boolean validoTarjeta = false;
+        float cuenta1Saldo = cuenta1.getSaldo();
+        float cuenta2Saldo = cuenta2.getSaldo();
+        float cuenta3Saldo = cuenta3.getSaldo();
+        do {
+            System.out.println("Introduce la tarjeta: ");
+            tarjeta = Lib.leerInt();
+            if (tarjeta == tarjeta1.getNuemroTarjeta() || tarjeta == tarjeta2.getNuemroTarjeta() ||
+                    tarjeta == tarjeta3.getNuemroTarjeta()){
+                valido = true;
+            }
 
+        }while (!valido);
+        if (tarjeta == tarjeta1.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta");
+                pin = Lib.leerInt();
+                if (pin == tarjeta1.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres retirar: ");
+                    retirada = Lib.leerFloat();
+                    cuenta1.setSaldo(cuenta1Saldo - retirada);
+                    validoTarjeta = true;
+                }
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta2.getNuemroTarjeta()){
+            do {
+                System.out.println("Escribe el pin de la tarjeta: ");
+                pin = Lib.leerInt();
+                if (pin == tarjeta2.getPin()){
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres ingresar: ");
+                    retirada = Lib.leerFloat();
+                    cuenta1.setSaldo(cuenta1Saldo - retirada);
+                    validoTarjeta = true;
+                }
+            }while (!validoTarjeta);
+        }else if (tarjeta == tarjeta3.getNuemroTarjeta()) {
+            do {
+                System.out.println("Escribe el pin de la tarjeta: ");
+                pin = Lib.leerInt();
+                if (pin == tarjeta3.getPin()) {
+                    System.out.println("Pin correcto!!!");
+                    System.out.println("Escribe la cantidad que quieres ingresar: ");
+                    retirada = Lib.leerFloat();
+                    cuenta1.setSaldo(cuenta1Saldo - retirada);
+                    validoTarjeta = true;
+                }
+            } while (!validoTarjeta);
+        }
 
     }
 

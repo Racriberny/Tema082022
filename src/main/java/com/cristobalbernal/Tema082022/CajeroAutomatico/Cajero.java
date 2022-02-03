@@ -5,11 +5,24 @@ import com.cristobalbernal.Tema082022.Lib.Lib;
 public class Cajero {
     private static final Tarjeta tarjeta1 = new Tarjeta(24095720,1234,234);
     private static final Tarjeta tarjeta2 = new Tarjeta(48573927,4567,321);
-    private static final Tarjeta tarjeta3 = new Tarjeta(24095720,8904,874);
+    private static final Tarjeta tarjeta3 = new Tarjeta(65392748,8904,874);
     private static final Cuenta cuenta1 = new Cuenta("Jose Angel Navarro Martinez",350,tarjeta1);
     private static final Cuenta cuenta2 = new Cuenta("Mario Garcia Muñoz",700,tarjeta2);
     private static final Cuenta cuenta3 = new Cuenta("Azul Calabuig Garcia",1500,tarjeta3);
     public void execute(){
+        /*
+        Cuenta cuentas = new Cuenta[10];
+        for(Cuenta cuanta : cuentas){
+            cuenta = new Cuenta(Lib.alea(0,10)
+        }
+         */
+
+
+
+
+
+
+
         int opcion;
         do {
             opcion = menuPrincipal();
@@ -70,8 +83,10 @@ public class Cajero {
             }while (!validoTarjeta);
         }else if (tarjeta == tarjeta3.getNuemroTarjeta()) {
             do {
+                System.out.println(tarjeta3.getPin());
                 System.out.println("Escribe el pin de la tarjeta: ");
                 pin = Lib.leerInt();
+                System.out.println(tarjeta3.getPin());
                 if (pin == tarjeta3.getPin()) {
                     System.out.println("Pin correcto!!!");
                     System.out.println("Escribe la cantidad que quieres ingresar: ");

@@ -26,4 +26,13 @@ public class Tarjeta {
     public int getCvc() {
         return cvc;
     }
+
+    @Override
+    public String toString() {
+        return "Tarjeta{" +
+                "nuemroTarjeta=" + nuemroTarjeta +
+                ", pin=" + pin +
+                ", cvc=" + cvc +
+                '}';
+    }
 }

@@ -25,9 +25,7 @@ public class Principal {
                 break;
             }
         }while (opcion !=0);
-
-
-
+        System.out.println("has salido");
     }
 
     private void consultas() {

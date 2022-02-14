@@ -7,7 +7,6 @@ public class Main {
         //Cajero cajero = new Cajero();
         //cajero.execute();
         Cajero cajero = new Cajero();
-        cajero.execute();
 
     }
 }

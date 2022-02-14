@@ -1,12 +1,12 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
 public class Alumnos {
-    private int nia;
+    private String nia;
     private String nombre;
     private String apellidos;
     private String fecha_nacimiento;
     private String grupo;
-    private int telefono;
+    private String telefono;
 
     @Override
     public String toString() {
@@ -20,11 +20,11 @@ public class Alumnos {
                 '}';
     }
 
-    public int getNia() {
+    public String getNia() {
         return nia;
     }
 
-    public void setNia(int nia) {
+    public void setNia(String nia) {
         this.nia = nia;
     }
 
@@ -60,15 +60,15 @@ public class Alumnos {
         this.grupo = grupo;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public Alumnos(int nia, String nombre, String apellidos, String fecha_nacimiento, String grupo, int telefono) {
+    public Alumnos(String nia, String nombre, String apellidos, String fecha_nacimiento, String grupo, String telefono) {
         this.nia = nia;
         this.nombre = nombre;
         this.apellidos = apellidos;

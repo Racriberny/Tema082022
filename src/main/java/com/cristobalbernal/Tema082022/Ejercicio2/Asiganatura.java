@@ -11,6 +11,12 @@ public class Asiganatura {
         this.curso = curso;
     }
 
+    public Asiganatura() {
+        nombre = "Programacion";
+        codigo = 2;
+        curso = "1SMX";
+    }
+
     public String getNombre() {
         return nombre;
     }

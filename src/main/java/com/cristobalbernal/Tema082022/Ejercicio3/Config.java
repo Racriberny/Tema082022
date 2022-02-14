@@ -1,4 +1,4 @@
-package com.cristobalbernal.Tema082022.CajeroGerman;
+package com.cristobalbernal.Tema082022.Ejercicio3;
 
 public class Config {
     public static final int NUM_ALUMNOS = 10;

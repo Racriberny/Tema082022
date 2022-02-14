@@ -1,14 +1,12 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
-import com.cristobalbernal.Tema082022.CajeroGerman.Config;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 import com.github.javafaker.Faker;
 
 import java.util.Locale;
 
 public class Principal {
-    private static final int ALUMNOS =  1000;
-    private static final int MAXIMO_TELEFONO = 8;
+    private static final int ALUMNOS =  2000;
     private static final String[] GRUPOS = {"1DAM","2DAM","1SMX","2SMX"};
     private static final int MIN = 1000;
     private int numeroAlumnos;
@@ -18,7 +16,8 @@ public class Principal {
         alumnos = new Alumnos[ALUMNOS];
         numeroAlumnos = 0;
         //datosPrueba();
-        //datosDePruebaFaker();
+        datosDePruebaFaker();
+
     }
     public void execute(){
 
@@ -32,9 +31,18 @@ public class Principal {
                 break;
                 case 3: consultas();
                 break;
+                case 4:
+                    visualizarAlumnos();
+                    break;
             }
         }while (opcion !=0);
         System.out.println("Has salido");
+    }
+
+    private void visualizarAlumnos() {
+        for (int i = 0; i < alumnos.length ; i++) {
+            System.out.println(alumnos[i]);
+        }
     }
 
     private void consultas() {
@@ -114,6 +122,7 @@ public class Principal {
         if (posicionNia >=0){
             alumnos[posicionNia] = null;
             System.out.println("El alumno se ha borrado correctamente!!!");
+            numeroAlumnos--;
         }else {
             System.out.println("No existe ningun alumno con este nia!!");
         }
@@ -128,38 +137,89 @@ public class Principal {
         String telefono;
         boolean validado = false;
         //Aqui la recomendacion es hacer una validacion que lo que le introduces tiene algun caracter...
-        do {
-            System.out.println("Escribe el nia de 4 digitos:  ");
-            nia = Lib.leerLinea();
-            for (int i = 0; i <alumnos.length ; i++) {
-                if (alumnos[i].getNia().equals(nia)){
-                    System.out.println("Ya existe un alumno con este nia!!!");
+        try {
+            do {
+                System.out.println("Escribe el nia:  ");
+                nia = Lib.leerLinea();
+                for (int i = 0; i <alumnos.length ; i++) {
+                    if (alumnos[i].getNia().equals(nia)){
+                        System.out.println("Ya existe un alumno con este nia!!!");
+                        validado = false;
+                    }else {
+                        validado = true;
+                    }
+                }
+            }while (!validado);
+
+            do {
+                System.out.println("Escribe el nombre del alumno:");
+                nombre = Lib.leerLinea();
+                if (nombre.length() == 0){
+                    System.out.println("No has introducido ningun nombre!!");
+                    validado = false;
                 }else {
-                    System.out.println("Escribe el nombre del alumno: ");
-                    nombre = Lib.leerLinea();
-
-                    System.out.println("Escribe el apellido del alumno: ");
-                    apellido = Lib.leerLinea();
-
-                    System.out.println("Escribe la fecha de nacimiento: ");
-                    fechaNacimiento = Lib.leerLinea();
-
-                    System.out.println("Escribe al grupo al que pertenece: ");
-                    grupo = Lib.leerLinea();
-
-                    System.out.println("Escribe el telefono del alumno: ");
-                    telefono = Lib.leerLinea();
-
-                    alumnos[i] = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
-
                     validado = true;
                 }
+            }while (!validado);
+
+            do {
+                System.out.println("Escribe el apellido del alumno:");
+                apellido = Lib.leerLinea();
+                if (apellido.length() == 0){
+                    System.out.println("No has introducido ningun apellido!!");
+                    validado = false;
+                }else {
+                    validado = true;
+                }
+            }while (!validado);
+
+            do {
+                System.out.println("Escribe la fecha de nacimiento del alumno:");
+                fechaNacimiento = Lib.leerLinea();
+                if (fechaNacimiento.length() == 0){
+                    System.out.println("No has introducido ninguna fecha de nacimiento!!");
+                    validado = false;
+                }else {
+                    validado = true;
+                }
+            }while (!validado);
+
+            do {
+                System.out.println("Escribe el grupo del alumno:");
+                grupo = Lib.leerLinea();
+                if (grupo.length() == 0){
+                    System.out.println("No has introducido ningun grupo!!");
+                    validado = false;
+                }else {
+                    validado = true;
+                }
+            }while (!validado);
+
+            do {
+                System.out.println("Escribe el telefono del alumno:");
+                telefono = Lib.leerLinea();
+                if (telefono.length() == 0){
+                    System.out.println("No has introducido ningun telefono!!");
+                    validado = false;
+                }else {
+                    validado = true;
+                }
+            }while (!validado);
+
+            for (int i = 0; i <alumnos.length ; i++) {
+                if (alumnos[i] == null){
+                    alumnos[i] = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
+                }else {
+                    alumnos[i] = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
+                }
             }
-        }while (validado);
+        }catch (NullPointerException npe){
+            System.out.println("Error");
+        }
     }
 
     public int menuPrincipal(){
-        int option = 0;
+        int option;
         System.out.println("**GESTION ALUMNOS**");
         System.out.println("*******************");
         System.out.println("1. Nuevo alumno...");

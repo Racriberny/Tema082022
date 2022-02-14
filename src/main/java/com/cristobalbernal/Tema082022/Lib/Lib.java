@@ -81,6 +81,9 @@ public class Lib {
     public static void visualizarArraysChar(char[] array){
         System.out.println(Arrays.toString(array));
     }
+    public static void visualizarArraysString(String[] array){
+        System.out.println(Arrays.toString(array));
+    }
 
     public static void visualizarArraysDouble(double[] array){
         System.out.println(Arrays.toString(array));
@@ -122,6 +125,10 @@ public class Lib {
             }
             System.out.println();
         }
+    }
+    public static void pausa() {
+        System.out.println("Pulsa INTRO para continuar");
+        Lib.leerLinea();
     }
 }
 

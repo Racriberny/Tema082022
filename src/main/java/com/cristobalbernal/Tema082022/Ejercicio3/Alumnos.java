@@ -1,25 +1,28 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Alumnos {
     private String nia;
     private String nombre;
     private String apellidos;
-    private GregorianCalendar fecha_nacimiento;
+    private Date fecha_nacimiento;
     private String grupo;
     private String telefono;
 
     @Override
     public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return "Alumnos{" +
                 "nia='" + nia + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                ", fecha_nacimiento='" + fecha_nacimiento + '\'' +
+                ", fecha_nacimiento='" + simpleDateFormat.format(fecha_nacimiento.getTime()) + '\'' +
                 ", grupo='" + grupo + '\'' +
                 ", telefono=" + telefono +
                 '}';
@@ -49,11 +52,11 @@ public class Alumnos {
         this.apellidos = apellidos;
     }
 
-    public GregorianCalendar getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -73,7 +76,7 @@ public class Alumnos {
         this.telefono = telefono;
     }
 
-    public Alumnos(String nia, String nombre, String apellidos, GregorianCalendar fecha_nacimiento, String grupo, String telefono) {
+    public Alumnos(String nia, String nombre, String apellidos, Date fecha_nacimiento, String grupo, String telefono) {
         this.nia = nia;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -81,13 +84,5 @@ public class Alumnos {
         this.grupo = grupo;
         this.telefono = telefono;
     }
-    public int getEdadDos(){
-        int anyoNacimiento = fecha_nacimiento.get(Calendar.YEAR);
-        int mesNacimiento = fecha_nacimiento.get(Calendar.MONTH) + 1;
-        int diaNacimiento = fecha_nacimiento.get(Calendar.DAY_OF_MONTH);
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate fechaNacimiento = LocalDate.of(diaNacimiento,mesNacimiento,anyoNacimiento);
-        Period periode = Period.between(fechaActual,fechaNacimiento);
-        return periode.getYears();
-    }
+
 }

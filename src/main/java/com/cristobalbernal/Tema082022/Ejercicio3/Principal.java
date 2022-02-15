@@ -3,11 +3,13 @@ package com.cristobalbernal.Tema082022.Ejercicio3;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 import com.github.javafaker.Faker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Principal {
-    private static final int ALUMNOS =  1;
+    private static final int ALUMNOS =  3;
     private static final String[] GRUPOS = {"1DAM","2DAM","1SMX","2SMX"};
     private static final int MIN = 1000;
     private static final int MIN_NOMBRE = 3 ;
@@ -29,11 +31,11 @@ public class Principal {
             opcion = menuPrincipal();
             switch (opcion){
                 case 1: nuevoAlumno();
-                break;
+                    break;
                 case 2: bajaAlumno();
-                break;
+                    break;
                 case 3: consultas();
-                break;
+                    break;
                 case 4:
                     visualizarAlumnos();
                     break;
@@ -136,7 +138,7 @@ public class Principal {
         String nia;
         String nombre;
         String apellido;
-        GregorianCalendar fechaNacimiento;
+        Date fechaNacimiento = null;
         int dia;
         int mes;
         int anyo;
@@ -177,19 +179,19 @@ public class Principal {
                 System.out.println("El apellido es invalido escribe uno con " + MIN_APELLIDO + "carateres");
             }
         }while (!validado);
-        
+        //No funciona//
         do {
-            System.out.println("Escribe el dia: ");
-            dia = Lib.leerInt();
-            System.out.println("Escribe el mes");
-            mes = Lib.leerInt();
-            System.out.println("Escribe el anyo:");
-            anyo = Lib.leerInt();
-            fechaNacimiento = new GregorianCalendar();
-            fechaNacimiento.set(anyo,mes,dia);
-
-            validado = dia != 0 || mes != 0 || anyo != 0;
-
+            if (fechaNacimiento == null){
+                System.out.println("Escribe la fecha de nacimiento: ");
+                fechaNacimiento = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                GregorianCalendar cal = new GregorianCalendar();
+                cal.setTime(fechaNacimiento);
+                simpleDateFormat.format(fechaNacimiento.getTime());
+                validado = false;
+            }else {
+                validado = true;
+            }
         }while (!validado);
 
         do {
@@ -267,12 +269,14 @@ public class Principal {
             System.out.println(alumno.toString());
         }
     }
+
+     */
     private void datosDePruebaFaker(){
         Faker faker = new Faker(Locale.forLanguageTag("es"));
         String nia;
         String nombre;
         String apellidos;
-        String fecha_nacimiento;
+        Date fecha_nacimiento;
         String grupo;
         String telefono;
 
@@ -280,9 +284,11 @@ public class Principal {
             nia = faker.idNumber().valid();
             nombre = faker.name().firstName();
             apellidos = faker.name().lastName();
-            fecha_nacimiento = faker.date().birthday().toString();
+            fecha_nacimiento = faker.date().birthday(18,40);
             grupo = String.valueOf(Lib.numeroAleatorio(0,GRUPOS.length));
             telefono = faker.phoneNumber().phoneNumber();
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(fecha_nacimiento);
             alumnos[numeroAlumnos] = new Alumnos(nia,nombre,apellidos,fecha_nacimiento,grupo,telefono);
             numeroAlumnos++;
         }
@@ -290,7 +296,4 @@ public class Principal {
             System.out.println(alumno.toString());
         }
     }
-
-     */
-
 }

@@ -1,10 +1,15 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Alumnos {
     private String nia;
     private String nombre;
     private String apellidos;
-    private String fecha_nacimiento;
+    private GregorianCalendar fecha_nacimiento;
     private String grupo;
     private String telefono;
 
@@ -44,11 +49,11 @@ public class Alumnos {
         this.apellidos = apellidos;
     }
 
-    public String getFecha_nacimiento() {
+    public GregorianCalendar getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(String fecha_nacimiento) {
+    public void setFecha_nacimiento(GregorianCalendar fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
@@ -68,12 +73,21 @@ public class Alumnos {
         this.telefono = telefono;
     }
 
-    public Alumnos(String nia, String nombre, String apellidos, String fecha_nacimiento, String grupo, String telefono) {
+    public Alumnos(String nia, String nombre, String apellidos, GregorianCalendar fecha_nacimiento, String grupo, String telefono) {
         this.nia = nia;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fecha_nacimiento = fecha_nacimiento;
         this.grupo = grupo;
         this.telefono = telefono;
+    }
+    public int getEdadDos(){
+        int anyoNacimiento = fecha_nacimiento.get(Calendar.YEAR);
+        int mesNacimiento = fecha_nacimiento.get(Calendar.MONTH) + 1;
+        int diaNacimiento = fecha_nacimiento.get(Calendar.DAY_OF_MONTH);
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaNacimiento = LocalDate.of(diaNacimiento,mesNacimiento,anyoNacimiento);
+        Period periode = Period.between(fechaActual,fechaNacimiento);
+        return periode.getYears();
     }
 }

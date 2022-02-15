@@ -3,12 +3,15 @@ package com.cristobalbernal.Tema082022.Ejercicio3;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 import com.github.javafaker.Faker;
 
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Principal {
-    private static final int ALUMNOS =  2000;
+    private static final int ALUMNOS =  1;
     private static final String[] GRUPOS = {"1DAM","2DAM","1SMX","2SMX"};
     private static final int MIN = 1000;
+    private static final int MIN_NOMBRE = 3 ;
+    private static final int MIN_APELLIDO = 3 ;
     private int numeroAlumnos;
     Alumnos [] alumnos;
 
@@ -16,7 +19,7 @@ public class Principal {
         alumnos = new Alumnos[ALUMNOS];
         numeroAlumnos = 0;
         //datosPrueba();
-        datosDePruebaFaker();
+        //datosDePruebaFaker();
 
     }
     public void execute(){
@@ -129,93 +132,100 @@ public class Principal {
     }
 
     private void nuevoAlumno() {
+        int contador=0;
         String nia;
         String nombre;
         String apellido;
-        String fechaNacimiento;
+        GregorianCalendar fechaNacimiento;
+        int dia;
+        int mes;
+        int anyo;
         String grupo;
         String telefono;
         boolean validado = false;
         //Aqui la recomendacion es hacer una validacion que lo que le introduces tiene algun caracter...
-        try {
-            do {
-                System.out.println("Escribe el nia:  ");
-                nia = Lib.leerLinea();
-                for (int i = 0; i <alumnos.length ; i++) {
-                    if (alumnos[i].getNia().equals(nia)){
-                        System.out.println("Ya existe un alumno con este nia!!!");
-                        validado = false;
-                    }else {
-                        validado = true;
-                    }
-                }
-            }while (!validado);
-
-            do {
-                System.out.println("Escribe el nombre del alumno:");
-                nombre = Lib.leerLinea();
-                if (nombre.length() == 0){
-                    System.out.println("No has introducido ningun nombre!!");
-                    validado = false;
-                }else {
+        do {
+            System.out.println("Escribe el nia:  ");
+            nia = Lib.leerLinea();
+            for (int i = 0; i <numeroAlumnos ; i++) {
+                if (alumnos[i].getNia().equals(nia)){
+                    System.out.println("Ya existe un alumno con ese nia!!");
                     validado = true;
-                }
-            }while (!validado);
-
-            do {
-                System.out.println("Escribe el apellido del alumno:");
-                apellido = Lib.leerLinea();
-                if (apellido.length() == 0){
-                    System.out.println("No has introducido ningun apellido!!");
+                }else {
                     validado = false;
-                }else {
-                    validado = true;
-                }
-            }while (!validado);
 
-            do {
-                System.out.println("Escribe la fecha de nacimiento del alumno:");
-                fechaNacimiento = Lib.leerLinea();
-                if (fechaNacimiento.length() == 0){
-                    System.out.println("No has introducido ninguna fecha de nacimiento!!");
-                    validado = false;
-                }else {
-                    validado = true;
-                }
-            }while (!validado);
-
-            do {
-                System.out.println("Escribe el grupo del alumno:");
-                grupo = Lib.leerLinea();
-                if (grupo.length() == 0){
-                    System.out.println("No has introducido ningun grupo!!");
-                    validado = false;
-                }else {
-                    validado = true;
-                }
-            }while (!validado);
-
-            do {
-                System.out.println("Escribe el telefono del alumno:");
-                telefono = Lib.leerLinea();
-                if (telefono.length() == 0){
-                    System.out.println("No has introducido ningun telefono!!");
-                    validado = false;
-                }else {
-                    validado = true;
-                }
-            }while (!validado);
-
-            for (int i = 0; i <alumnos.length ; i++) {
-                if (alumnos[i] == null){
-                    alumnos[i] = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
-                }else {
-                    alumnos[i] = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
                 }
             }
-        }catch (NullPointerException npe){
-            System.out.println("Error");
+
+        }while (validado);
+
+        do {
+            System.out.println("Escribe el nombre del alumnos");
+            nombre = Lib.leerLinea();
+            validado = (nombre.length()>=MIN_NOMBRE);
+            if (!validado) {
+                System.out.println("El nombre es invalido escribe uno con " + MIN_NOMBRE + "carateres");
+            }
+
+        }while (!validado);
+
+        do {
+            System.out.println("Escribe el apellido del alumno:");
+            apellido = Lib.leerLinea();
+            validado = (apellido.length()>=MIN_APELLIDO);
+            if (!validado) {
+                System.out.println("El apellido es invalido escribe uno con " + MIN_APELLIDO + "carateres");
+            }
+        }while (!validado);
+        
+        do {
+            System.out.println("Escribe el dia: ");
+            dia = Lib.leerInt();
+            System.out.println("Escribe el mes");
+            mes = Lib.leerInt();
+            System.out.println("Escribe el anyo:");
+            anyo = Lib.leerInt();
+            fechaNacimiento = new GregorianCalendar();
+            fechaNacimiento.set(anyo,mes,dia);
+
+            validado = dia != 0 || mes != 0 || anyo != 0;
+
+        }while (!validado);
+
+        do {
+            System.out.println("Escribe el grupo del alumno:");
+            grupo = Lib.leerLinea();
+            if (grupo.length() == 0){
+                System.out.println("No has introducido ningun grupo!!");
+                validado = false;
+            }else {
+                validado = true;
+            }
+        }while (!validado);
+
+        do {
+            System.out.println("Escribe el telefono del alumno:");
+            telefono = Lib.leerLinea();
+            if (telefono.length() == 0){
+                System.out.println("No has introducido ningun telefono!!");
+                validado = false;
+            }else {
+                validado = true;
+            }
+        }while (!validado);
+
+        Alumnos a = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
+
+        if(numeroAlumnos==alumnos.length){
+            Alumnos[] alumnosAux= new Alumnos[alumnos.length + 2];
+            for (int i = 0; i < alumnos.length; i++) {
+                alumnosAux[i]=alumnos[i];
+            }
+            alumnos = alumnosAux;
         }
+        alumnos[numeroAlumnos] = a;
+        numeroAlumnos++;
+
     }
 
     public int menuPrincipal(){
@@ -246,6 +256,7 @@ public class Principal {
         option = Lib.leerInt();
         return option;
     }
+    /*
     private void datosPrueba(){
         for (int i = 0; i <alumnos.length ; i++) {
             alumnos[i] = new Alumnos(String.format("%4d",Lib.numeroAleatorio(Config.MIN_NIA,Config.MAX_NIA)),
@@ -279,5 +290,7 @@ public class Principal {
             System.out.println(alumno.toString());
         }
     }
+
+     */
 
 }

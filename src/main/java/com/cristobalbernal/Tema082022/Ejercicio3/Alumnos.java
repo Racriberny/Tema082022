@@ -1,11 +1,7 @@
 package com.cristobalbernal.Tema082022.Ejercicio3;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class Alumnos {
     private String nia;

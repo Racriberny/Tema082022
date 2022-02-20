@@ -130,6 +130,10 @@ public class Lib {
         System.out.println("Pulsa INTRO para continuar");
         Lib.leerLinea();
     }
+    public static boolean booleanAlea(){
+        Random r = new Random();
+        return r.nextBoolean();
+    }
 }
 
 

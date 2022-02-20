@@ -3,6 +3,7 @@ package com.cristobalbernal.Tema082022.Ejercicio3;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 import com.github.javafaker.Faker;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,11 +22,10 @@ public class Principal {
         alumnos = new Alumnos[ALUMNOS];
         numeroAlumnos = 0;
         //datosPrueba();
-        //datosDePruebaFaker();
+        datosDePruebaFaker();
 
     }
     public void execute(){
-
         int opcion;
         do {
             opcion = menuPrincipal();
@@ -54,6 +54,7 @@ public class Principal {
         int opcion;
         String nia;
         String grupo;
+        int edad;
         do {
             opcion = menuConsultas();
             switch (opcion){
@@ -63,33 +64,50 @@ public class Principal {
                     busquedaGrupo(grupo);
                     break;
                 case 2:
-                    busquedaEdad();
+                    System.out.println("Escribe la edad");
+                    edad = Lib.leerInt();
+                    busquedaEdad(edad);
                     break;
                 case 3:
                     System.out.println("Escribe el nia: ");
                     nia = Lib.leerLinea();
-                    busquedaNia(nia);
+                    consultarNia(nia);
                     break;
                 case 4:
-                    busquedaApellidos();
+                    String apellidos;
+                    System.out.println("Escribe el apellido: ");
+                    apellidos = Lib.leerLinea();
+                    busquedaApellidos(apellidos);
                     break;
             }
         }while (opcion !=0);
     }
-
-    private void busquedaApellidos() {
-        String apellidos;
-        System.out.println("Escribe el apellido: ");
-        apellidos = Lib.leerLinea();
-        for (int i = 0; i < alumnos.length ; i++) {
-            if (alumnos[i].getApellidos().equals(apellidos)){
-                System.out.println(apellidos);
+    private void busquedaApellidos(String apellido) {
+        int contador = 0;
+        for (Alumnos alumno : alumnos) {
+            if (alumno.getApellidos().equals(apellido)) {
+                contador++;
+            }
+        }
+        if (contador == 1){
+            for (Alumnos alumno : alumnos) {
+                if (alumno.getApellidos().equals(apellido)) {
+                    System.out.println(alumno);
+                }
+            }
+        }else {
+            System.out.println("No existe ninguno");
+        }
+    }
+    private void consultarNia(String nia) {
+        for (Alumnos alumno : alumnos) {
+            if (alumno.getNia().equals(nia)) {
+                System.out.println(alumno);
             }else {
-                System.out.println("No se ha encontrado ese apellido!!!!");
+                System.out.println("No se ha encontrado el " + nia + "introducido");
             }
         }
     }
-
     private int busquedaNia(String nia) {
         for (int i = 0; i < alumnos.length ; i++) {
             if (alumnos[i].getNia().equals(nia)){
@@ -99,19 +117,40 @@ public class Principal {
         return -1;
     }
 
-    private void busquedaEdad() {
+    private void busquedaEdad(int fecha) {
+        int contador = 0;
+        for (Alumnos alumno : alumnos) {
+            if (alumno.getEdad() == fecha) {
+                contador++;
+            }
+        }
+        if (contador == 1){
+            for (Alumnos alumno : alumnos) {
+                if (alumno.getEdad() == fecha) {
+                    System.out.println(alumno);
+                }
+            }
+        }else {
+            System.out.println("No existe ninguno");
+        }
     }
 
     private void busquedaGrupo(String grupo) {
-        int encontrado = 0;
-        for (int i = 0; i <alumnos.length ; i++) {
-            if (alumnos[i].getGrupo().equals(grupo)){
-                System.out.println(alumnos[i]);
-            }else {
-                System.out.println("No se ha encontrado nadie en este grupo!!!");
+        int contador = 0;
+        for (Alumnos alumno : alumnos) {
+            if (alumno.getGrupo().equals(grupo)) {
+                contador++;
             }
         }
-
+        if (contador == 1){
+            for (Alumnos alumno : alumnos) {
+                if (alumno.getGrupo().equals(grupo)) {
+                    System.out.println(alumno);
+                }
+            }
+        }else {
+            System.out.println("No existe ninguno");
+        }
     }
 
     private void bajaAlumno() {
@@ -138,10 +177,8 @@ public class Principal {
         String nia;
         String nombre;
         String apellido;
-        Date fechaNacimiento = null;
-        int dia;
-        int mes;
-        int anyo;
+        String fecha;
+        GregorianCalendar fechaFecha = null;
         String grupo;
         String telefono;
         boolean validado = false;
@@ -181,16 +218,18 @@ public class Principal {
         }while (!validado);
         //No funciona//
         do {
-            if (fechaNacimiento == null){
-                System.out.println("Escribe la fecha de nacimiento: ");
-                fechaNacimiento = new Date();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                GregorianCalendar cal = new GregorianCalendar();
-                cal.setTime(fechaNacimiento);
-                simpleDateFormat.format(fechaNacimiento.getTime());
-                validado = false;
-            }else {
+            System.out.println("Escribe la fecha dd/mm/yyyy");
+            fecha = Lib.leerLinea();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            try{
+                Date date = sdf.parse(fecha);
+                fechaFecha = new GregorianCalendar();
+                fechaFecha.setTime(date);
                 validado = true;
+            }catch (ParseException pe){
+                validado = false;
+                System.out.println("La fecha es incorrecta");
+
             }
         }while (!validado);
 
@@ -216,7 +255,7 @@ public class Principal {
             }
         }while (!validado);
 
-        Alumnos a = new Alumnos(nia,nombre,apellido,fechaNacimiento,grupo,telefono);
+        Alumnos a = new Alumnos(nia,nombre,apellido,fechaFecha,grupo,telefono);
 
         if(numeroAlumnos==alumnos.length){
             Alumnos[] alumnosAux= new Alumnos[alumnos.length + 2];
@@ -276,7 +315,7 @@ public class Principal {
         String nia;
         String nombre;
         String apellidos;
-        Date fecha_nacimiento;
+        GregorianCalendar fecha_nacimiento;
         String grupo;
         String telefono;
 
@@ -284,11 +323,11 @@ public class Principal {
             nia = faker.idNumber().valid();
             nombre = faker.name().firstName();
             apellidos = faker.name().lastName();
-            fecha_nacimiento = faker.date().birthday(18,40);
+            fecha_nacimiento = new GregorianCalendar();
+            fecha_nacimiento.setTime(faker.date().birthday(18,80));
             grupo = String.valueOf(Lib.numeroAleatorio(0,GRUPOS.length));
             telefono = faker.phoneNumber().phoneNumber();
             GregorianCalendar cal = new GregorianCalendar();
-            cal.setTime(fecha_nacimiento);
             alumnos[numeroAlumnos] = new Alumnos(nia,nombre,apellidos,fecha_nacimiento,grupo,telefono);
             numeroAlumnos++;
         }

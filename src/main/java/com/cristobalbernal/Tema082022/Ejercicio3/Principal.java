@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Principal {
-    private static final int ALUMNOS =  3;
+    private static final int ALUMNOS =  10000;
     private static final String[] GRUPOS = {"1DAM","2DAM","1SMX","2SMX"};
     private static final int MIN = 1000;
     private static final int MIN_NOMBRE = 3 ;
@@ -22,7 +22,7 @@ public class Principal {
         alumnos = new Alumnos[ALUMNOS];
         numeroAlumnos = 0;
         //datosPrueba();
-        datosDePruebaFaker();
+        //datosDePruebaFaker();
 
     }
     public void execute(){
@@ -216,7 +216,6 @@ public class Principal {
                 System.out.println("El apellido es invalido escribe uno con " + MIN_APELLIDO + "carateres");
             }
         }while (!validado);
-        //No funciona//
         do {
             System.out.println("Escribe la fecha dd/mm/yyyy");
             fecha = Lib.leerLinea();
@@ -327,7 +326,6 @@ public class Principal {
             fecha_nacimiento.setTime(faker.date().birthday(18,80));
             grupo = String.valueOf(Lib.numeroAleatorio(0,GRUPOS.length));
             telefono = faker.phoneNumber().phoneNumber();
-            GregorianCalendar cal = new GregorianCalendar();
             alumnos[numeroAlumnos] = new Alumnos(nia,nombre,apellidos,fecha_nacimiento,grupo,telefono);
             numeroAlumnos++;
         }

@@ -1,20 +1,21 @@
 package com.cristobalbernal.Tema082022.Ejercicio6;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Bicicleta {
     private String referencia;
     private String marca;
-    private int peso;
+    private double peso;
     private int pulgadasRueda;
     private boolean motor;
-    private Date fechaFabricacion;
+    private GregorianCalendar fechaFabricacion;
     private double precio;
     private int numeroExistencias;
 
 
-    public Bicicleta(String referencia, String marca, int peso, int pulgadasRueda, boolean motor, Date fechaFabricacion, double precio, int numeroExistencias) {
+    public Bicicleta(String referencia, String marca, double peso, int pulgadasRueda, boolean motor, GregorianCalendar fechaFabricacion, double precio, int numeroExistencias) {
         this.referencia = referencia;
         this.marca = marca;
         this.peso = peso;
@@ -41,7 +42,7 @@ public class Bicicleta {
         this.marca = marca;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return peso;
     }
 
@@ -65,11 +66,11 @@ public class Bicicleta {
         this.motor = motor;
     }
 
-    public Date getFechaFabricacion() {
+    public GregorianCalendar getFechaFabricacion() {
         return fechaFabricacion;
     }
 
-    public void setFechaFabricacion(Date fechaFabricacion) {
+    public void setFechaFabricacion(GregorianCalendar fechaFabricacion) {
         this.fechaFabricacion = fechaFabricacion;
     }
 
@@ -87,13 +88,14 @@ public class Bicicleta {
 
     @Override
     public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return "Bicicleta{" +
                 "referencia='" + referencia + '\'' +
                 ", marca='" + marca + '\'' +
                 ", peso=" + peso +
                 ", pulgadasRueda=" + pulgadasRueda +
                 ", motor=" + motor +
-                ", fechaFabricacion=" + fechaFabricacion +
+                ", fechaFabricacion=" + simpleDateFormat.format(fechaFabricacion.getTime()) +
                 ", precio=" + precio +
                 ", numeroExistencias=" + numeroExistencias +
                 '}';

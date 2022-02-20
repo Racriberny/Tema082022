@@ -7,6 +7,6 @@ public class ConfigBicicletas {
     public static final int MAX_RUEDA = 29;
     public static final int MIN_PRECIO = 50;
     public static final int MAX_PRECIO = 1000;
-    public static final int MIN_EXISTENCIAS = 0;
+    public static final int MIN_EXISTENCIAS = 1;
     public static final int MAX_EXISTENCIAS = 10;
 }

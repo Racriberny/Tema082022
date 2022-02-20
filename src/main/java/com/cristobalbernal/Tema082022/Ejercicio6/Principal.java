@@ -8,13 +8,13 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Principal {
-    private static final int NUM_BICICLETAS = 4;
+    private static final int NUM_BICICLETAS = 5;
     Bicicleta [] bicicletas;
     Tienda tienda = new Tienda();
 
     public Principal(){
         bicicletas = new Bicicleta[NUM_BICICLETAS];
-        tienda.crearDatos(bicicletas);
+        //tienda.crearDatos(bicicletas);
     }
     public void execute(){
         int opcion;
@@ -22,7 +22,7 @@ public class Principal {
             opcion = menuPrincipal();
             switch (opcion){
                 case 1:
-                    anadirBicicleta();
+                    tienda.anadirBicicleta(bicicletas);
                 break;
 
                 case 2:
@@ -50,16 +50,6 @@ public class Principal {
         for (Bicicleta bicicleta: bicicletas) {
             System.out.println(bicicleta);
         }
-    }
-
-    private void anadirBicicleta() {
-        boolean valido = false;
-
-        do {
-            String numeroReferecia;
-            System.out.println("Escribe el numero de referecia!!!");
-            numeroReferecia = Lib.leerLinea();
-        }while (valido);
     }
 
     private void menuConsultas() {

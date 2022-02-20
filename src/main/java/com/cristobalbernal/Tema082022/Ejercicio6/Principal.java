@@ -26,7 +26,9 @@ public class Principal {
                 break;
 
                 case 2:
-
+                    System.out.println("Escribe el numero de referencia: ");
+                    String referecia = Lib.leerLinea();
+                    tienda.venderBicicleta(bicicletas,referecia);
                 break;
                 case 3:
                     menuConsultas();

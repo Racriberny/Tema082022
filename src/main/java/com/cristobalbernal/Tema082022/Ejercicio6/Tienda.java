@@ -152,4 +152,25 @@ public class Tienda {
         bicicletas[numeroBicicletas] = a;
         numeroBicicletas++;
     }
+
+    public void venderBicicleta(Bicicleta[] bicicletas, String referecia){
+        int posicion;
+        posicion = busquedaBici(referecia,bicicletas);
+
+        if (posicion >=0){
+            bicicletas[posicion] = null;
+            System.out.println("El alumno se ha borrado correctamente!!!");
+            numeroBicicletas--;
+        }else {
+            System.out.println("No existe ningun alumno con este nia!!");
+        }
+    }
+    private int busquedaBici(String referencia, Bicicleta[] bicicletas) {
+        for (int i = 0; i < bicicletas.length ; i++) {
+            if (bicicletas[i].getReferencia().equals(referencia)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

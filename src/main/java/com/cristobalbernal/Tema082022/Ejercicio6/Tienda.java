@@ -1,6 +1,5 @@
 package com.cristobalbernal.Tema082022.Ejercicio6;
 
-import com.cristobalbernal.Tema082022.Ejercicio3.Alumnos;
 import com.cristobalbernal.Tema082022.Lib.Lib;
 import com.github.javafaker.Faker;
 
@@ -18,6 +17,7 @@ public class Tienda {
         Faker faker = new Faker(Locale.forLanguageTag("es"));
         String referencia;
         String marca;
+        String modelo;
         double peso;
         int pulgadasRueda;
         boolean motor;
@@ -29,13 +29,14 @@ public class Tienda {
             referencia = faker.idNumber().valid();
             marca = faker.company().name();
             peso = Lib.numeroAleatorio(ConfigBicicletas.MIN_PESO,ConfigBicicletas.MAX_PESO);
+            modelo = faker.company().industry();
             pulgadasRueda = Lib.numeroAleatorio(ConfigBicicletas.MIN_RUEDA,ConfigBicicletas.MAX_RUEDA);
             motor = Lib.booleanAlea();
             fechaFabricacion = new GregorianCalendar();
             fechaFabricacion.setTime(faker.date().birthday(18,80));
             precio = Lib.numeroAleatorio(ConfigBicicletas.MIN_PRECIO,ConfigBicicletas.MAX_PRECIO);
             numeroExistencias = Lib.numeroAleatorio(ConfigBicicletas.MIN_EXISTENCIAS,ConfigBicicletas.MAX_EXISTENCIAS);
-            bicicleta[i] = new Bicicleta(referencia,marca,peso,pulgadasRueda,motor,fechaFabricacion,precio,numeroExistencias);
+            bicicleta[i] = new Bicicleta(referencia,marca,modelo,peso,pulgadasRueda,motor,fechaFabricacion,precio,numeroExistencias);
             numeroBicicletas++;
         }
         for (Bicicleta bicicle:bicicleta) {
@@ -43,11 +44,15 @@ public class Tienda {
         }
     }
 
+    /*
     public void mostrarStock(Bicicleta[] bicicletas){
         for (Bicicleta bicicleta : bicicletas) {
             System.out.println("Numero referecia " + bicicleta.getReferencia() + " tiene un stock de " + bicicleta.getNumeroExistencias());
         }
     }
+
+     */
+
     public void anadirBicicleta(Bicicleta[]bicicletas){
         String referecia;
         int cantidad = 0;
@@ -70,13 +75,14 @@ public class Tienda {
         String nuevoNumeroDeReferencia;
         String marca;
         double peso;
+        String modelo;
         int pulgadas;
         String motorString;
         boolean motor = false;
         GregorianCalendar fechaFabricacion = null;
         double precio;
         int numeroExistencias;
-        boolean validado = false;
+        boolean validado;
 
         do {
             System.out.println("Escribe el numero de referencia");
@@ -88,6 +94,12 @@ public class Tienda {
             System.out.println("Escribe la marca de la bicicleta");
             marca = Lib.leerLinea();
             validado = marca.length() != 0;
+        }while (!validado);
+
+        do {
+            System.out.println("Escribe el modelo de la bicicleta");
+            modelo = Lib.leerLinea();
+            validado = modelo.length() != 0;
         }while (!validado);
 
         do {
@@ -140,7 +152,7 @@ public class Tienda {
             validado = !(numeroExistencias < 0) && !(numeroExistencias > 10000);
         }while (!validado);
 
-        Bicicleta a = new Bicicleta(nuevoNumeroDeReferencia,marca,peso,pulgadas,motor,fechaFabricacion,precio,numeroExistencias);
+        Bicicleta a = new Bicicleta(nuevoNumeroDeReferencia,marca,modelo,peso,pulgadas,motor,fechaFabricacion,precio,numeroExistencias);
 
         if(numeroBicicletas==bicicletas.length){
             Bicicleta[] bici= new Bicicleta[bicicletas.length + 2];
@@ -153,18 +165,26 @@ public class Tienda {
         numeroBicicletas++;
     }
 
+
+    //Esta mal
     public void venderBicicleta(Bicicleta[] bicicletas, String referecia){
         int posicion;
         posicion = busquedaBici(referecia,bicicletas);
-
+        int cantidad;
+        System.out.println("Escribe la cantidad que bici quieres quitar del numero de referencia " + referecia);
+        cantidad = Lib.leerInt();
         if (posicion >=0){
             bicicletas[posicion] = null;
-            System.out.println("El alumno se ha borrado correctamente!!!");
+            int bici = bicicletas[posicion].getNumeroExistencias();
+            System.out.println("La bicicleta se ha quitado de stock!!!");
             numeroBicicletas--;
+            bicicletas[numeroBicicletas].setNumeroExistencias(bici - cantidad);
         }else {
-            System.out.println("No existe ningun alumno con este nia!!");
+            System.out.println("No existe ninguna bicicleta con esta referencia!!");
         }
     }
+
+
     private int busquedaBici(String referencia, Bicicleta[] bicicletas) {
         for (int i = 0; i < bicicletas.length ; i++) {
             if (bicicletas[i].getReferencia().equals(referencia)){
@@ -172,5 +192,49 @@ public class Tienda {
             }
         }
         return -1;
+    }
+
+    public void consultaReferencia(Bicicleta[] bicicletas, String referencia){
+        int contador = 0;
+        for (Bicicleta value : bicicletas) {
+            if (value.getReferencia().equals(referencia)) {
+                contador++;
+            }
+        }
+        if (contador == 1){
+            for (Bicicleta bicicleta : bicicletas) {
+                System.out.println(bicicleta);
+            }
+        }else {
+            System.out.println("No existe ninguna bicicleta con este numero de referencia");
+        }
+    }
+    public void consultarPorMarca(Bicicleta[] bicicletas, String marca){
+        int contador = 0;
+        for (Bicicleta value : bicicletas) {
+            if (value.getMarca().equals(marca)) {
+                contador++;
+            }
+        }
+        if (contador == 1){
+            for (Bicicleta bicicleta : bicicletas) {
+                System.out.println(bicicleta);
+            }
+        }else {
+            System.out.println("No existe ninguna bici de esta marca");
+        }
+    }
+    public void consultarModelo(Bicicleta[] bicicletas, String modelo){
+        int contador = 0;
+        for (Bicicleta value : bicicletas) {
+            if (value.getModelo().equals(modelo)) {
+                contador++;
+            }
+        }
+        if (contador == 1){
+            for (Bicicleta bicicleta : bicicletas) {
+                System.out.println(bicicleta);
+            }
+        }
     }
 }

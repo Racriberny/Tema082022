@@ -1,11 +1,6 @@
 package com.cristobalbernal.Tema082022.Ejercicio6;
 
 import com.cristobalbernal.Tema082022.Lib.Lib;
-import com.github.javafaker.Faker;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class Principal {
     private static final int NUM_BICICLETAS = 5;
@@ -14,7 +9,7 @@ public class Principal {
 
     public Principal(){
         bicicletas = new Bicicleta[NUM_BICICLETAS];
-        //tienda.crearDatos(bicicletas);
+        tienda.crearDatos(bicicletas);
     }
     public void execute(){
         int opcion;
@@ -22,30 +17,52 @@ public class Principal {
             opcion = menuPrincipal();
             switch (opcion){
                 case 1:
+                    System.out.println("AÑADIR BICICLETA!!!");
                     tienda.anadirBicicleta(bicicletas);
                 break;
 
                 case 2:
+                    System.out.println("VENDER BICICLETA!!!");
                     System.out.println("Escribe el numero de referencia: ");
                     String referecia = Lib.leerLinea();
                     tienda.venderBicicleta(bicicletas,referecia);
                 break;
                 case 3:
-                    menuConsultas();
+                    consultas();
                 break;
 
                 case 4:
                     mostrarBicicletas();
                 break;
-
-                case 5:
-                tienda.mostrarStock(bicicletas);
+            }
+        }while (opcion !=0);
+    }
+    private void consultas() {
+        int opcion;
+        boolean valido;
+        String referecia;
+        String marca;
+        String modelo;
+        do {
+            opcion = menuConsultas();
+            switch (opcion){
+                case 1:
+                    System.out.println("Escribe el numero de referencia: ");
+                    referecia = Lib.leerLinea();
+                    tienda.consultaReferencia(bicicletas,referecia);
+                break;
+                case 2:
+                    System.out.println("Escribe la marca de la bicicleta: ");
+                    marca = Lib.leerLinea();
+                    tienda.consultarPorMarca(bicicletas,marca);
+                break;
+                case 3:
+                    System.out.println("Escribe el modelo de la bicicleta: ");
+                    modelo = Lib.leerLinea();
+                    tienda.consultarModelo(bicicletas,modelo);
                 break;
             }
         }while (opcion !=0);
-
-
-
     }
 
     private void mostrarBicicletas() {
@@ -54,7 +71,8 @@ public class Principal {
         }
     }
 
-    private void menuConsultas() {
+    private int menuConsultas() {
+        int opcion;
         System.out.println("******************");
         System.out.println("CONSULTA BICICLETAS");
         System.out.println("******************");
@@ -62,6 +80,9 @@ public class Principal {
         System.out.println("2- Consultar por marca");
         System.out.println("3- Consultar por modelo");
         System.out.println("0- Volver al menu principal");
+        System.out.println("Escribe una opcion: ");
+        opcion = Lib.leerInt();
+        return opcion;
     }
 
     private int menuPrincipal() {

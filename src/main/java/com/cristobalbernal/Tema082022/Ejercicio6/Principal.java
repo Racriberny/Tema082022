@@ -22,7 +22,8 @@ public class Principal {
                 break;
 
                 case 2:
-                    System.out.println("VENDER BICICLETA!!!");
+                    System.out.println("Bicicletas disponibles: ");
+                    tienda.mostrarStock(bicicletas);
                     System.out.println("Escribe el numero de referencia: ");
                     String referecia = Lib.leerLinea();
                     tienda.venderBicicleta(bicicletas,referecia);

@@ -44,14 +44,12 @@ public class Tienda {
         }
     }
 
-    /*
+
     public void mostrarStock(Bicicleta[] bicicletas){
         for (Bicicleta bicicleta : bicicletas) {
-            System.out.println("Numero referecia " + bicicleta.getReferencia() + " tiene un stock de " + bicicleta.getNumeroExistencias());
+            System.out.println(bicicleta);
         }
     }
-
-     */
 
     public void anadirBicicleta(Bicicleta[]bicicletas){
         String referecia;
@@ -105,13 +103,13 @@ public class Tienda {
         do {
             System.out.println("Escribe el peso de la biciclta");
             peso = Lib.leerDouble();
-            validado = !(peso < 0) && !(peso > 10);
+            validado = !(peso < ConfigBicicletas.MIN_PESO) && !(peso > ConfigBicicletas.MAX_PESO);
         }while (!validado);
 
         do {
             System.out.println("Escribe las pulgadas de la bicicleta: ");
             pulgadas = Lib.leerInt();
-            validado = pulgadas >= 26 && pulgadas <= 29;
+            validado = pulgadas >= ConfigBicicletas.MIN_RUEDA && pulgadas <= ConfigBicicletas.MAX_RUEDA;
         }while (!validado);
 
         System.out.println("Escribe si tiene motor: Si/No");
@@ -143,7 +141,7 @@ public class Tienda {
         do {
             System.out.println("Escribe el precio de la biciclta");
             precio = Lib.leerDouble();
-            validado = !(precio < 0) && !(precio > 10000);
+            validado = !(precio < ConfigBicicletas.MIN_PRECIO) && !(precio > ConfigBicicletas.MAX_PRECIO);
         }while (!validado);
 
         do {
@@ -168,42 +166,40 @@ public class Tienda {
 
     //Esta mal
     public void venderBicicleta(Bicicleta[] bicicletas, String referecia){
-        int posicion;
-        posicion = busquedaBici(referecia,bicicletas);
-        int cantidad;
-        System.out.println("Escribe la cantidad que bici quieres quitar del numero de referencia " + referecia);
-        cantidad = Lib.leerInt();
-        if (posicion >=0){
-            bicicletas[posicion] = null;
-            int bici = bicicletas[posicion].getNumeroExistencias();
-            System.out.println("La bicicleta se ha quitado de stock!!!");
-            numeroBicicletas--;
-            bicicletas[numeroBicicletas].setNumeroExistencias(bici - cantidad);
-        }else {
-            System.out.println("No existe ninguna bicicleta con esta referencia!!");
-        }
-    }
+        String respuesta = "";
 
+        for (int i = 0; i <numeroBicicletas ; i++) {
+            if (bicicletas[i].getReferencia().equals(referecia)){
+                int numeroBici = bicicletas[i].getNumeroExistencias();
+                System.out.println("Has selecioando " + bicicletas[i]);
+                System.out.println("La vas a comprar: ");
+                respuesta = Lib.leerLinea();
 
-    private int busquedaBici(String referencia, Bicicleta[] bicicletas) {
-        for (int i = 0; i < bicicletas.length ; i++) {
-            if (bicicletas[i].getReferencia().equals(referencia)){
-                return i;
+                if ("si".equalsIgnoreCase(respuesta)){
+                    bicicletas[i].setNumeroExistencias(numeroBici - 1);
+                    if (bicicletas[i].getNumeroExistencias() == 0){
+                        bicicletas[i] = null;
+                    }
+                }else if ("no".equalsIgnoreCase(respuesta)){
+                    System.out.println("No has comprado la bicicleta");
+                }else {
+                    System.out.println("No has escrito si-no");
+                }
             }
         }
-        return -1;
     }
-
     public void consultaReferencia(Bicicleta[] bicicletas, String referencia){
         int contador = 0;
-        for (Bicicleta value : bicicletas) {
-            if (value.getReferencia().equals(referencia)) {
+        for (int i = 0; i <numeroBicicletas ; i++) {
+            if (bicicletas[i].getReferencia().equals(referencia)) {
                 contador++;
             }
         }
         if (contador == 1){
-            for (Bicicleta bicicleta : bicicletas) {
-                System.out.println(bicicleta);
+            for (int i = 0; i <numeroBicicletas ; i++) {
+                if (bicicletas[i].getReferencia().equals(referencia)){
+                    System.out.println(bicicletas[i]);
+                }
             }
         }else {
             System.out.println("No existe ninguna bicicleta con este numero de referencia");
@@ -211,14 +207,16 @@ public class Tienda {
     }
     public void consultarPorMarca(Bicicleta[] bicicletas, String marca){
         int contador = 0;
-        for (Bicicleta value : bicicletas) {
-            if (value.getMarca().equals(marca)) {
+        for (int i = 0; i <numeroBicicletas ; i++) {
+            if (bicicletas[i].getMarca().equals(marca)) {
                 contador++;
             }
         }
         if (contador == 1){
-            for (Bicicleta bicicleta : bicicletas) {
-                System.out.println(bicicleta);
+            for (int i = 0; i <numeroBicicletas ; i++) {
+                if (bicicletas[i].getMarca().equals(marca)){
+                    System.out.println(bicicletas[i]);
+                }
             }
         }else {
             System.out.println("No existe ninguna bici de esta marca");
@@ -226,14 +224,16 @@ public class Tienda {
     }
     public void consultarModelo(Bicicleta[] bicicletas, String modelo){
         int contador = 0;
-        for (Bicicleta value : bicicletas) {
-            if (value.getModelo().equals(modelo)) {
+        for (int i = 0; i <numeroBicicletas ; i++) {
+            if (bicicletas[i].getModelo().equals(modelo)) {
                 contador++;
             }
         }
         if (contador == 1){
-            for (Bicicleta bicicleta : bicicletas) {
-                System.out.println(bicicleta);
+            for (int i = 0; i <numeroBicicletas ; i++) {
+                if (bicicletas[i].getModelo().equals(modelo)){
+                    System.out.println(bicicletas[i]);
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ import com.cristobalbernal.Tema082022.Lib.Lib;
 public class Principal {
     private static final int NUM_BICICLETAS = 5;
     Bicicleta [] bicicletas;
-    Tienda tienda = new Tienda();
+    private Tienda tienda = new Tienda();
 
     public Principal(){
         bicicletas = new Bicicleta[NUM_BICICLETAS];

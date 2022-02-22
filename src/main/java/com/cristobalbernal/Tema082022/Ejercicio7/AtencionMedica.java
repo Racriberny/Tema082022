@@ -1,5 +1,7 @@
 package com.cristobalbernal.Tema082022.Ejercicio7;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 public class AtencionMedica {
@@ -7,15 +9,25 @@ public class AtencionMedica {
     private Paciente paciente;
     private GregorianCalendar fechaEntrada;
     private GregorianCalendar fechaSalida;
-    private int horaEntrada;
     private float[] preRev;
 
-    public AtencionMedica(String sintomalogia, Paciente paciente, GregorianCalendar fechaEntrada, GregorianCalendar fechaSalida, int horaEntrada, float[] preRev) {
+    public AtencionMedica(String sintomalogia, Paciente paciente, GregorianCalendar fechaEntrada, GregorianCalendar fechaSalida, float[] preRev) {
         this.sintomalogia = sintomalogia;
         this.paciente = paciente;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
-        this.horaEntrada = horaEntrada;
         this.preRev = new float[4];
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return "AtencionMedica{" +
+                "sintomalogia='" + sintomalogia + '\'' +
+                ", paciente=" + paciente +
+                ", fechaEntrada=" + simpleDateFormat.format(fechaEntrada.getTime()) +
+                ", fechaSalida=" + simpleDateFormat.format(fechaSalida.getTime()) +
+                ", preRev=" + Arrays.toString(preRev) +
+                '}';
     }
 }

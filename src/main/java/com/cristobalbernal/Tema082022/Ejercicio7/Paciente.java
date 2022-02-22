@@ -41,4 +41,15 @@ public class Paciente {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "sip='" + sip + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", edad=" + edad +
+                ", sexo=" + sexo +
+                '}';
+    }
 }

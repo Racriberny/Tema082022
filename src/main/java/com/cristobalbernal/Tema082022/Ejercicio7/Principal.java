@@ -5,18 +5,14 @@ import com.cristobalbernal.Tema082022.Lib.Lib;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Principal {
-    private Paciente[] paciente;
-    private AtencionMedica[] atencionMedicas;
-    Centro centro = new Centro();
-    private static final int NUM_PACIENTES = 10;
-    public Principal(){
-        paciente = new Paciente[NUM_PACIENTES];
-        atencionMedicas = new AtencionMedica[NUM_PACIENTES];
-        centro.generarPaciente(paciente,NUM_PACIENTES);
-        centro.generarHistoria(atencionMedicas,NUM_PACIENTES);
-    }
+    private static final int MAX_PACIENTES = 500;
+    private static final int MAX_REGISTROS_HISTORICO = 2000;
+    private Centro centro;
     public void execute(){
         int opcion;
+        centro = new Centro(MAX_PACIENTES,MAX_REGISTROS_HISTORICO);
+        centro.generarPaciente(MAX_PACIENTES);
+        centro.generarHistoria(MAX_REGISTROS_HISTORICO);
 
         do {
             opcion = menuCentro();

@@ -40,7 +40,7 @@ public class Tienda {
             numeroBicicletas++;
         }
         for (Bicicleta bicicle:bicicleta) {
-            System.out.println(bicicle);
+            System.out.println(bicicle.toString());
         }
     }
 

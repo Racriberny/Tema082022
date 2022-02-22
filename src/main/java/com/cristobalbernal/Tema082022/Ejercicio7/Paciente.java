@@ -2,7 +2,7 @@ package com.cristobalbernal.Tema082022.Ejercicio7;
 
 public class Paciente {
     public enum Sexo{
-        MASCULO,FEMENINO
+        MASCULINO,FEMENINO
     }
     private String sip;
     private String nombre;

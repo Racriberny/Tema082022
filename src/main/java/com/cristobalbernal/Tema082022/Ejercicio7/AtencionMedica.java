@@ -11,12 +11,18 @@ public class AtencionMedica {
     private GregorianCalendar fechaSalida;
     private float[] preRev;
 
+
     public AtencionMedica(String sintomalogia, Paciente paciente, GregorianCalendar fechaEntrada, GregorianCalendar fechaSalida, float[] preRev) {
         this.sintomalogia = sintomalogia;
         this.paciente = paciente;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
-        this.preRev = new float[4];
+        this.preRev = preRev;
+    }
+
+    public AtencionMedica(Paciente paciente,String sintomalogia, GregorianCalendar fechaEntrada) {
+        this.sintomalogia = sintomalogia;
+        this.fechaEntrada = fechaEntrada;
     }
 
     @Override

@@ -21,7 +21,11 @@ public class Centro {
 
     }
 
-
+    public void mostrarPacientes(){
+        for (int i = 0; i <nPacientes ; i++) {
+            System.out.println(pacientes[i]);
+        }
+    }
 
     public void generarPaciente(int nPacientes){
         Faker faker = new Faker(Locale.forLanguageTag("es"));
@@ -34,7 +38,7 @@ public class Centro {
             sip = faker.idNumber().valid();
             nombre = faker.name().name();
             apellido = faker.name().firstName();
-            sexo = Lib.numeroAleatorio(0,1) == 0 ? Paciente.Sexo.FEMENINO : Paciente.Sexo.MASCULO;
+            sexo = Lib.numeroAleatorio(0,1) == 0 ? Paciente.Sexo.FEMENINO : Paciente.Sexo.MASCULINO;
             edad = Lib.numeroAleatorio(1,100);
             pacientes[i] = new Paciente(sip,nombre,apellido,edad,sexo);
             this.nPacientes++;
@@ -89,12 +93,24 @@ public class Centro {
         int dia = Lib.numeroAleatorio(1, diaActual);
         int hora = Lib.numeroAleatorio(0,23);
         int minutos = Lib.numeroAleatorio(0,59);
+        int temperatura;
+        int pulsaciones;
+        int teSis;
+        int teDias;
         float[] preV = new float[4];
         for (int i = 0; i <numHistorial ; i++) {
-            sintomolagia = faker.name().prefix();
-            paciente = new Paciente(faker.idNumber().valid(),faker.name().name(),faker.name().firstName(),Lib.numeroAleatorio(1,90),Lib.numeroAleatorio(0,1) == 0 ? Paciente.Sexo.FEMENINO : Paciente.Sexo.MASCULO);
+            sintomolagia = faker.medical().symptoms();
+            paciente = new Paciente(faker.idNumber().valid(),faker.name().name(),faker.name().firstName(),Lib.numeroAleatorio(1,90),Lib.numeroAleatorio(0,1) == 0 ? Paciente.Sexo.FEMENINO : Paciente.Sexo.MASCULINO);
             GregorianCalendar fechaEntrada = new GregorianCalendar(anyo, mes, dia, hora, minutos);
-            GregorianCalendar fechaSalida = new GregorianCalendar(anyo, mes-1,dia,hora,minutos);
+            temperatura = Lib.numeroAleatorio(35,42);
+            pulsaciones = Lib.numeroAleatorio(60,120);
+            teSis = Lib.numeroAleatorio(80,84);
+            teDias = Lib.numeroAleatorio(50,54);
+            preV[0] = temperatura;
+            preV[1] = pulsaciones;
+            preV[2] = teSis;
+            preV[3] = teDias;
+            GregorianCalendar fechaSalida = new GregorianCalendar(anyo, mes + 1,dia,hora,minutos);
             historial[i] = new AtencionMedica(sintomolagia,paciente,fechaEntrada,fechaSalida,preV);
         }
         for (AtencionMedica ate: historial) {
@@ -107,15 +123,27 @@ public class Centro {
     }
 
     public int buscarPacientePorSip(String sip){
-        return 1;
+        for (int i = 0; i <nPacientes ; i++) {
+            if (pacientes[i].getSip().equals(sip)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public AtencionMedica[] buscarHistoricoPorFechas(GregorianCalendar fechaInicio, GregorianCalendar fechaFin) {
         return null;
     }
-    public int nuevoPaciente(int sip, String nombre, String apellido1, String apellido2, Paciente.Sexo sexo, int edad) {
-        return nPacientes;
+    public AtencionMedica nuevoPaciente(String sip, String nombre, String apellido1, Paciente.Sexo sexo, int edad,String sintomas,GregorianCalendar fechaEntrada) {
+        Paciente paciente = new Paciente(sip,nombre,apellido1,edad,sexo);
+        pacientes[nPacientes] = paciente;
+        nPacientes++;
+
+        AtencionMedica atencionMedica = new AtencionMedica(paciente,sintomas,fechaEntrada);
+        historial[nHistorial] = atencionMedica;
+        nHistorial++;
+        return atencionMedica;
+
+
     }
-
-
 }

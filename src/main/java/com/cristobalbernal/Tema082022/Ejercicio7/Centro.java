@@ -122,7 +122,15 @@ public class Centro {
         return null;
     }
 
-    public int buscarPacientePorSip(String sip){
+    public Paciente buscarPacientePorSip(String sip){
+        for (int i = 0; i <nPacientes ; i++) {
+            if (pacientes[i].getSip().equals(sip)){
+                return pacientes[i];
+            }
+        }
+        return null;
+    }
+    public int busquedaPacientePorSip(String sip){
         for (int i = 0; i <nPacientes ; i++) {
             if (pacientes[i].getSip().equals(sip)){
                 return i;

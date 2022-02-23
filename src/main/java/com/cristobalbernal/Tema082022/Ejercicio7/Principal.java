@@ -49,7 +49,7 @@ public class Principal {
             sip = Lib.leerLinea();
             validado = sip.length() != 0;
         }while (!validado);
-        pos = centro.buscarPacientePorSip(sip);
+        pos = centro.busquedaPacientePorSip(sip);
 
         if (pos < 0){
             String repuesta = "";
@@ -139,13 +139,14 @@ public class Principal {
                         sip = Lib.leerLinea();
                         validado = sip.length() != 0;
                     }while (!validado);
-                    centro.buscarPacientePorSip(sip);
+                    System.out.println(centro.buscarPacientePorSip(sip));
                     break;
                 case 2:
                     break;
                 case 3:
                     break;
                 case 4:
+                    centro.generarHistoria(500);
                     break;
             }
         }while (opcion !=0);

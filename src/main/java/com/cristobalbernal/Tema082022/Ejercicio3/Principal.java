@@ -253,9 +253,7 @@ public class Principal {
                 validado = true;
             }
         }while (!validado);
-
         Alumnos a = new Alumnos(nia,nombre,apellido,fechaFecha,grupo,telefono);
-
         if(numeroAlumnos==alumnos.length){
             Alumnos[] alumnosAux= new Alumnos[alumnos.length + 2];
             for (int i = 0; i < alumnos.length; i++) {

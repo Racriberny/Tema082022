@@ -28,7 +28,7 @@ public class Pila<T> {
     }
 
     public T pop() {
-        T e = (T) new Object();
+        T e = null;
         if(!isEmpty()) {
             e = datos[nElementos - 1];
             nElementos--;
@@ -43,7 +43,7 @@ public class Pila<T> {
         return newArray;
     }
     public T top() {
-        T e = (T) new Object();
+        T e = null;
         if(!isEmpty()) {
             e = datos[nElementos - 1];
         }
